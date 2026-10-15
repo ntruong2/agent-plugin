@@ -4,14 +4,15 @@
     "name": "ntruong2"
   },
   "metadata": {
-    "description": "Game-dev skills and the PixelLab MCP server for Claude Code"
+    "description": "Agent Plugin: game-dev skills, PixelLab and Playwright MCP servers for Claude Code"
   },
   "plugins": [
     {
       "name": "agent-plugin",
+      "displayName": "Agent Plugin",
       "source": "./plugins/agent-plugin",
       "description": "24 game-dev skills (Agent Sprite Forge, awesome-gamedev-agent-skills), PixelLab and Playwright MCP servers, and a cloud setup hook",
-      "version": "0.3.1"
+      "version": "0.3.2"
     }
   ]
 }

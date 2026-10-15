@@ -1,4 +1,4 @@
-# agent-plugin
+# Agent Plugin
 
 Marketplace Claude Code chứa plugin **`agent-plugin`**: 24 skill làm game, MCP **PixelLab** và **Playwright**,
 cùng hook tự cài công cụ trong phiên cloud, để mọi phiên Claude Code (mọi repo) có cùng bộ công cụ.
