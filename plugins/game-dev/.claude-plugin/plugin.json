@@ -1,0 +1,9 @@
+{
+  "name": "game-dev",
+  "version": "0.1.0",
+  "description": "Game-dev skills (sprites, maps, Phaser, game feel, UI/UX, audio, saves...) and the PixelLab MCP server",
+  "author": {
+    "name": "ntruong2"
+  },
+  "license": "SEE LICENSE IN ../../THIRD_PARTY.md"
+}
