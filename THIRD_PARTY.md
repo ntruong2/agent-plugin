@@ -30,7 +30,7 @@ Made on 2026-10-15 after the review in `SECURITY-REVIEW.md`:
 ## Fetched at runtime (not vendored)
 
 - [`@playwright/mcp`](https://github.com/microsoft/playwright-mcp) `0.0.83` (Apache-2.0), started by
-  `plugins/agent-plugin/bin/playwright-mcp.sh` through `npx`; it pulls `playwright` from npm.
+  `plugins/agent-plugin/scripts/playwright-mcp.sh` through `npx`; it pulls `playwright` from npm.
 - The SessionStart hook installs `pillow`, `numpy`, `scipy`, `resvg-py` from PyPI and the
   project's own npm dependencies, only in cloud sessions.
 

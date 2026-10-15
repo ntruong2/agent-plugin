@@ -11,7 +11,7 @@
       "name": "agent-plugin",
       "source": "./plugins/agent-plugin",
       "description": "24 game-dev skills (Agent Sprite Forge, awesome-gamedev-agent-skills), PixelLab and Playwright MCP servers, and a cloud setup hook",
-      "version": "0.3.0"
+      "version": "0.3.1"
     }
   ]
 }
