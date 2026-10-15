@@ -12,7 +12,7 @@
       "displayName": "Agent Plugin",
       "source": "./plugins/agent-plugin",
       "description": "Setup hook (tools for the skills), PixelLab and Playwright MCP servers, paid-call policy",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "name": "agent-sprite-forge",
@@ -108,6 +108,34 @@
         "./skills/workflows/itch-publish"
       ],
       "description": "The router plus all game-dev skills across engines, disciplines, genres and workflows (upstream gamedev-skills/awesome-gamedev-agent-skills, Apache-2.0)"
+    },
+    {
+      "name": "playwright",
+      "displayName": "Playwright",
+      "source": {
+        "source": "github",
+        "repo": "microsoft/playwright"
+      },
+      "strict": false,
+      "skills": [
+        "./packages/playwright-core/src/tools/skills/playwright-cli",
+        "./packages/playwright-core/src/tools/skills/playwright-component-testing",
+        "./packages/playwright-core/src/tools/skills/playwright-trace"
+      ],
+      "description": "Playwright's own agent skills: playwright-cli, component testing, trace analysis (upstream microsoft/playwright, Apache-2.0)"
+    },
+    {
+      "name": "vite",
+      "displayName": "Vite",
+      "source": {
+        "source": "github",
+        "repo": "antfu/skills"
+      },
+      "strict": false,
+      "skills": [
+        "./skills/vite"
+      ],
+      "description": "Vite skill: config, features, plugin API, build/SSR, environment API, Rolldown migration (upstream antfu/skills, MIT)"
     }
   ]
 }
