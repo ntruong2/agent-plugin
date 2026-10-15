@@ -1,57 +1,103 @@
 #!/usr/bin/env bash
-# agent-plugin SessionStart hook. Checks the tools the skills need; in Claude Code cloud sessions
-# (CLAUDE_CODE_REMOTE=true, or AGENT_PLUGIN_AUTOINSTALL=1 anywhere) installs what is missing in the
-# background and returns at once. On other machines it only prints what is missing.
+# agent-plugin SessionStart hook. Checks the tools the skills need. In Claude Code cloud sessions
+# (CLAUDE_CODE_REMOTE=true, or AGENT_PLUGIN_AUTOINSTALL=1 anywhere) it installs what is missing in
+# the background and returns at once; elsewhere it only prints what is missing.
 set -u
-STATE="${HOME}/.cache/agent-plugin"
-mkdir -p "$STATE" 2>/dev/null || exit 0
+STATE="${XDG_CACHE_HOME:-$HOME/.cache}/agent-plugin"
+mkdir -p "$STATE/repos" 2>/dev/null || exit 0
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LOCK="$STATE/setup.lock.d"
+
+source_evt="startup"
+if [ ! -t 0 ]; then
+  input="$(cat 2>/dev/null || true)"
+  s="$(printf '%s' "$input" | grep -o '"source"[[:space:]]*:[[:space:]]*"[a-z]*"' | grep -o '"[a-z]*"$' | tr -d '"')"
+  [ -n "$s" ] && source_evt="$s"
+fi
+
+lock_pid() { cat "$LOCK/pid" 2>/dev/null; }
+lock_alive() { [ -d "$LOCK" ] && p="$(lock_pid)" && [ -n "$p" ] && kill -0 "$p" 2>/dev/null; }
+
+# An installer is still running: always say so, whatever triggered this hook.
+if lock_alive; then
+  echo "agent-plugin: background setup still running (log: $STATE/setup.log). Before running project tests or the sprite/map scripts, wait until $STATE/setup.done exists."
+  exit 0
+fi
+
+# Only startup and resume may start an installer (clear/compact only report).
+heavy=0
+case "$source_evt" in startup|resume) heavy=1 ;; esac
 
 need_py=0
-python3 -c 'import PIL, numpy, scipy, resvg_py' >/dev/null 2>&1 || need_py=1
+(cd / && python3 -I -c 'import PIL, numpy, scipy, resvg_py') >/dev/null 2>&1 || need_py=1
 
-need_pw=0
-have_browser=0
+need_pw=1
 for c in "${AGENT_PLUGIN_CHROMIUM:-}" /opt/pw-browsers/chromium; do
-  if [ -n "$c" ] && [ -x "$c" ]; then have_browser=1; break; fi
+  if [ -n "$c" ] && [ -x "$c" ]; then need_pw=0; break; fi
 done
-if [ "$have_browser" = 0 ] && ! ls -d "$HOME"/.cache/ms-playwright/chromium-* >/dev/null 2>&1; then need_pw=1; fi
+if [ "$need_pw" = 1 ]; then
+  for dir in "${PLAYWRIGHT_BROWSERS_PATH:-}" "${XDG_CACHE_HOME:-$HOME/.cache}/ms-playwright" "$HOME/Library/Caches/ms-playwright"; do
+    if [ -n "$dir" ] && ls -d "$dir"/chromium-* >/dev/null 2>&1; then need_pw=0; break; fi
+  done
+fi
 
 cloud=0
 if [ "${CLAUDE_CODE_REMOTE:-}" = "true" ] || [ "${AGENT_PLUGIN_AUTOINSTALL:-}" = "1" ]; then cloud=1; fi
 
-repos=""
+# Repos: install when node_modules is missing; a failed attempt is not retried until the lockfile changes.
+repos=()
+failed_repos=""
 if [ "$cloud" = 1 ] && [ "${AGENT_PLUGIN_REPO_INSTALL:-1}" = "1" ]; then
   for d in "${AGENT_PLUGIN_REPOS_ROOT:-/home/user}"/*/; do
     d="${d%/}"
-    if [ -f "$d/package.json" ] && [ ! -d "$d/node_modules" ]; then repos="$repos $d"; fi
+    [ -f "$d/package.json" ] || continue
+    key="$(printf '%s' "$d" | tr -c 'A-Za-z0-9._-' '_')"
+    lockhash="$(cat "$d/package.json" "$d/pnpm-lock.yaml" "$d/yarn.lock" "$d/package-lock.json" 2>/dev/null | cksum | cut -d' ' -f1)"
+    if [ -f "$STATE/repos/$key.failed" ] && [ "$(cat "$STATE/repos/$key.failed")" = "$lockhash" ]; then
+      failed_repos="$failed_repos $(basename "$d")"
+      continue
+    fi
+    [ -d "$d/node_modules" ] && continue
+    [ -f "$STATE/repos/$key.ok" ] && [ "$(cat "$STATE/repos/$key.ok")" = "$lockhash" ] && continue
+    repos+=("$d")
   done
 fi
 
-if [ "$need_py" = 0 ] && [ "$need_pw" = 0 ] && [ -z "$repos" ]; then exit 0; fi
+if [ -n "$failed_repos" ]; then
+  echo "agent-plugin: an earlier dependency install failed for:$failed_repos (log: $STATE/setup.log); it is not retried until the lockfile changes."
+fi
+
+if [ "$need_py" = 0 ] && [ "$need_pw" = 0 ] && [ "${#repos[@]}" = 0 ]; then exit 0; fi
 
 if [ "$cloud" = 0 ]; then
-  [ "$need_py" = 1 ] && echo "agent-plugin: Python packages for the sprite/map skills are missing: python3 -m pip install pillow numpy \"scipy>=1.11\" \"resvg-py>=0.5,<0.6\""
-  [ "$need_pw" = 1 ] && echo "agent-plugin: no Playwright Chromium found; the playwright MCP can install it with its browser_install tool."
+  [ "$need_py" = 1 ] && echo "agent-plugin: Python packages for the sprite/map skills are missing: python3 -m pip install --user pillow numpy \"scipy>=1.11\" \"resvg-py>=0.5,<0.6\""
+  [ "$need_pw" = 1 ] && echo "agent-plugin: no Playwright Chromium found; run: npx playwright install chromium"
   exit 0
 fi
 
-if [ -f "$STATE/setup.lock" ] && kill -0 "$(cat "$STATE/setup.lock" 2>/dev/null)" 2>/dev/null; then
-  echo "agent-plugin: background setup already running (log: $STATE/setup.log). Before running project tests or the sprite/map scripts, wait until $STATE/setup.done exists."
-  exit 0
-fi
+[ "$heavy" = 1 ] || exit 0
 
 if [ "${AGENT_PLUGIN_DRYRUN:-}" = "1" ]; then
-  echo "agent-plugin (dry run): python=$need_py playwright=$need_pw repos:${repos:- none}"
+  echo "agent-plugin (dry run): python=$need_py playwright=$need_pw repos: ${repos[*]:-none}"
   exit 0
 fi
 
-rm -f "$STATE/setup.done"
-NEED_PY="$need_py" NEED_PW="$need_pw" REPOS="$repos" STATE="$STATE" \
-  nohup setsid bash "$HERE/install-deps.sh" >"$STATE/setup.log" 2>&1 </dev/null &
+# Take the lock atomically; clear a stale one left by a dead installer.
+if ! mkdir "$LOCK" 2>/dev/null; then
+  if lock_alive; then exit 0; fi
+  rm -rf "$LOCK"
+  mkdir "$LOCK" 2>/dev/null || exit 0
+fi
+
+launcher=(nohup)
+command -v setsid >/dev/null 2>&1 && launcher+=(setsid)
+NEED_PY="$need_py" NEED_PW="$need_pw" STATE="$STATE" LOCK="$LOCK" \
+  "${launcher[@]}" bash "$HERE/install-deps.sh" ${repos[@]+"${repos[@]}"} >"$STATE/setup.log" 2>&1 </dev/null &
+echo "$!" > "$LOCK/pid"
+
 what=""
 [ "$need_py" = 1 ] && what="$what Python packages,"
 [ "$need_pw" = 1 ] && what="$what Playwright Chromium,"
-[ -n "$repos" ] && what="$what dependencies of:$repos,"
+[ "${#repos[@]}" -gt 0 ] && what="$what dependencies of: ${repos[*]},"
 echo "agent-plugin: installing in the background:${what%,}. Log: $STATE/setup.log. Before running project tests or the sprite/map scripts, wait until $STATE/setup.done exists (it holds a summary)."
 exit 0

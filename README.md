@@ -18,20 +18,30 @@ cùng hook tự cài công cụ trong phiên cloud, để mọi phiên Claude Co
 
 ## Tự cài công cụ (hook SessionStart)
 
-Mỗi khi phiên bắt đầu, hook kiểm tra (mất dưới 1 giây khi đã đủ):
+Khi phiên bắt đầu hoặc được mở lại, hook kiểm tra (dưới 1 giây khi đã đủ):
 
 - thư viện Python của skill vẽ: `pillow numpy scipy resvg-py`;
-- Chromium cho Playwright (`/opt/pw-browsers/chromium` hoặc `~/.cache/ms-playwright`);
-- repo trong `/home/user/*` có `package.json` mà chưa có `node_modules` (cài bằng pnpm/yarn/npm theo file lock).
+- Chromium cho Playwright (`/opt/pw-browsers/chromium`, `PLAYWRIGHT_BROWSERS_PATH` hoặc thư mục cache của Playwright);
+- repo trong `/home/user/*` có `package.json` mà chưa có `node_modules`.
 
-Trong **phiên cloud** (`CLAUDE_CODE_REMOTE=true`) hook cài phần thiếu **ở chế độ nền** rồi trả về ngay;
-nhật ký ở `~/.cache/agent-plugin/setup.log`, xong thì có `~/.cache/agent-plugin/setup.done`
-(Claude được nhắc chờ file này trước khi chạy test). Trên **máy cá nhân** hook không cài gì,
-chỉ nhắc phần còn thiếu. Biến điều chỉnh: `AGENT_PLUGIN_AUTOINSTALL=1` (cho phép cài ở máy cá nhân),
+Trong **phiên cloud** (`CLAUDE_CODE_REMOTE=true`) hook cài phần thiếu **ở chế độ nền** rồi trả về ngay:
+
+- Repo được cài đúng theo file lock (`pnpm install --frozen-lockfile`, `yarn install --frozen-lockfile`,
+  `npm ci`); không có file lock thì `npm install --no-package-lock`. Hook **không bao giờ sửa file lock**
+  và không đổi pnpm/yarn toàn cục (dùng `corepack pnpm …`).
+- Cài lỗi thì ghi nhận và **không thử lại** cho tới khi `package.json`/file lock đổi.
+- Nhật ký: `~/.cache/agent-plugin/setup.log`; xong thì có `~/.cache/agent-plugin/setup.done` (tóm tắt).
+  Claude được nhắc chờ file này trước khi chạy test; sau `/clear` hay nén ngữ cảnh mà vẫn đang cài
+  thì hook nhắc lại.
+- Chỉ một trình cài chạy tại một thời điểm (khoá `setup.lock.d`).
+
+Trên **máy cá nhân** hook không cài gì, chỉ nhắc phần còn thiếu. Biến điều chỉnh:
+`AGENT_PLUGIN_AUTOINSTALL=1` (cho cài ở máy cá nhân; Python cài bằng `pip --user`),
 `AGENT_PLUGIN_REPO_INSTALL=0` (không cài dependency repo), `AGENT_PLUGIN_CHROMIUM=<đường dẫn>`.
 
-Setup script của môi trường cloud vì vậy có thể để trống. Nếu vẫn giữ, nó chạy trước và được lưu
-bộ nhớ đệm, hook sẽ thấy đã đủ và không làm gì.
+MCP `playwright` lưu ảnh chụp và snapshot ở `~/.cache/agent-plugin/playwright-mcp`, không ghi vào repo.
+
+Setup script của môi trường cloud vì vậy có thể để trống (`exit 0`).
 
 ## Cài cho mọi phiên
 
