@@ -1,7 +1,7 @@
 {
   "name": "game-dev",
-  "version": "0.1.0",
-  "description": "Game-dev skills (sprites, maps, Phaser, game feel, UI/UX, audio, saves...) and the PixelLab MCP server",
+  "version": "0.2.0",
+  "description": "Game-dev skills, PixelLab and Playwright MCP servers, and a SessionStart hook that installs the tools they need in cloud sessions",
   "author": {
     "name": "ntruong2"
   },

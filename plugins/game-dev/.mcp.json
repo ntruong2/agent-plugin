@@ -6,6 +6,11 @@
       "headers": {
         "Authorization": "Bearer ${PIXELLAB_API_KEY}"
       }
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "bash",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/bin/playwright-mcp.sh"]
     }
   }
 }

@@ -27,6 +27,13 @@ Made on 2026-10-15 after the review in `SECURITY-REVIEW.md`:
 - `game-assets` from [Meowa-AI/meowa-skills](https://github.com/Meowa-AI/meowa-skills) (MIT), see
   `SECURITY-REVIEW.md`.
 
+## Fetched at runtime (not vendored)
+
+- [`@playwright/mcp`](https://github.com/microsoft/playwright-mcp) `0.0.83` (Apache-2.0), started by
+  `plugins/game-dev/bin/playwright-mcp.sh` through `npx`; it pulls `playwright` from npm.
+- The SessionStart hook installs `pillow`, `numpy`, `scipy`, `resvg-py` from PyPI and the
+  project's own npm dependencies, only in cloud sessions.
+
 ## Remote service
 
 The PixelLab MCP server (`plugins/game-dev/.mcp.json`) is a remote service at
