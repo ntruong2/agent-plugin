@@ -15,7 +15,7 @@ fi
 if [ "${NEED_PW:-0}" = 1 ]; then
   deps=()
   if [ "$(id -u)" = 0 ] && command -v apt-get >/dev/null 2>&1; then deps=(--with-deps); fi
-  if npx -y -p "@playwright/mcp@${GAME_DEV_PLAYWRIGHT_MCP_VERSION:-0.0.83}" playwright install "${deps[@]}" chromium; then
+  if npx -y -p "@playwright/mcp@${AGENT_PLUGIN_PLAYWRIGHT_MCP_VERSION:-0.0.83}" playwright install "${deps[@]}" chromium; then
     summary="$summary playwright:ok"
   else summary="$summary playwright:FAILED"; fi
 fi

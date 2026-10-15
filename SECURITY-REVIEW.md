@@ -14,7 +14,7 @@ from the review checkout. Outcome applied to this plugin:
 
 ---
 
-# Security verdict: game-dev plugin skills
+# Security verdict: agent-plugin plugin skills
 
 **Bottom line:** none of the 14 review jobs found malicious code, hidden network calls or obfuscation. Nothing runs on import or at session start. All 20 confirmed findings were downgraded to low or info on verification. The main risk is that skills spend money without asking: any provider key in the environment is treated as consent to make paid calls, with no default cap. The second risk is game-assets, which is the only skill with an agent-driven self-update that writes outside the plugin.
 

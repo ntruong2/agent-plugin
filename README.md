@@ -1,6 +1,6 @@
-# claude-game-plugin
+# agent-plugin
 
-Marketplace Claude Code chứa plugin **`game-dev`**: 24 skill làm game, MCP **PixelLab** và **Playwright**,
+Marketplace Claude Code chứa plugin **`agent-plugin`**: 24 skill làm game, MCP **PixelLab** và **Playwright**,
 cùng hook tự cài công cụ trong phiên cloud, để mọi phiên Claude Code (mọi repo) có cùng bộ công cụ.
 
 | Thành phần | Nội dung |
@@ -25,19 +25,19 @@ Mỗi khi phiên bắt đầu, hook kiểm tra (mất dưới 1 giây khi đã �
 - repo trong `/home/user/*` có `package.json` mà chưa có `node_modules` (cài bằng pnpm/yarn/npm theo file lock).
 
 Trong **phiên cloud** (`CLAUDE_CODE_REMOTE=true`) hook cài phần thiếu **ở chế độ nền** rồi trả về ngay;
-nhật ký ở `~/.cache/game-dev-plugin/setup.log`, xong thì có `~/.cache/game-dev-plugin/setup.done`
+nhật ký ở `~/.cache/agent-plugin/setup.log`, xong thì có `~/.cache/agent-plugin/setup.done`
 (Claude được nhắc chờ file này trước khi chạy test). Trên **máy cá nhân** hook không cài gì,
-chỉ nhắc phần còn thiếu. Biến điều chỉnh: `GAME_DEV_AUTOINSTALL=1` (cho phép cài ở máy cá nhân),
-`GAME_DEV_REPO_INSTALL=0` (không cài dependency repo), `GAME_DEV_CHROMIUM=<đường dẫn>`.
+chỉ nhắc phần còn thiếu. Biến điều chỉnh: `AGENT_PLUGIN_AUTOINSTALL=1` (cho phép cài ở máy cá nhân),
+`AGENT_PLUGIN_REPO_INSTALL=0` (không cài dependency repo), `AGENT_PLUGIN_CHROMIUM=<đường dẫn>`.
 
 Setup script của môi trường cloud vì vậy có thể để trống. Nếu vẫn giữ, nó chạy trước và được lưu
 bộ nhớ đệm, hook sẽ thấy đã đủ và không làm gì.
 
 ## Cài cho mọi phiên
 
-1. claude.ai → **Customize → Plugins → Add → Add marketplace** → nhập `ntruong2/claude-game-plugin`
+1. claude.ai → **Customize → Plugins → Add → Add marketplace** → nhập `ntruong2/agent-plugin`
    (repo private: cần đã kết nối GitHub và cấp cho Claude GitHub App quyền vào repo này).
-2. Bật plugin **game-dev**. Phiên mới sẽ có các skill.
+2. Bật plugin **agent-plugin**. Phiên mới sẽ có các skill.
 3. PixelLab: thêm **biến môi trường** `PIXELLAB_API_KEY` vào môi trường cloud (menu môi trường →
    Edit). Biến gắn theo môi trường, mỗi môi trường thêm một lần. Dùng biến môi trường thường;
    token để trong "Network secrets" có thể không tới được MCP.
@@ -46,17 +46,17 @@ bộ nhớ đệm, hook sẽ thấy đã đủ và không làm gì.
 Trên máy cá nhân (CLI):
 
 ```bash
-claude plugin marketplace add ntruong2/claude-game-plugin
-claude plugin install game-dev@claude-game-plugin
+claude plugin marketplace add ntruong2/agent-plugin
+claude plugin install agent-plugin@agent-plugin
 ```
 
 ## Cập nhật skill từ upstream
 
 Chép lại thư mục skill từ repo nguồn (đường dẫn trong `skills-lock.json`), áp lại các chỗ sửa
 trong THIRD_PARTY.md, rà lại phần thay đổi, tăng `version` trong
-`plugins/game-dev/.claude-plugin/plugin.json` và `.claude-plugin/marketplace.json`, rồi:
+`plugins/agent-plugin/.claude-plugin/plugin.json` và `.claude-plugin/marketplace.json`, rồi:
 
 ```bash
 claude plugin validate .
-claude plugin validate plugins/game-dev
+claude plugin validate plugins/agent-plugin
 ```

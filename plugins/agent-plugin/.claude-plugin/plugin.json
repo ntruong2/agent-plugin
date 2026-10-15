@@ -1,6 +1,6 @@
 {
-  "name": "game-dev",
-  "version": "0.2.0",
+  "name": "agent-plugin",
+  "version": "0.3.0",
   "description": "Game-dev skills, PixelLab and Playwright MCP servers, and a SessionStart hook that installs the tools they need in cloud sessions",
   "author": {
     "name": "ntruong2"

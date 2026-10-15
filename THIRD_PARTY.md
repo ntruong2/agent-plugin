@@ -1,6 +1,6 @@
 # Third-party skills
 
-The skills in `plugins/game-dev/skills/` come from these upstream projects (source path and
+The skills in `plugins/agent-plugin/skills/` come from these upstream projects (source path and
 upstream content hash of each skill: `skills-lock.json`).
 
 | Skills | Upstream | License |
@@ -30,11 +30,11 @@ Made on 2026-10-15 after the review in `SECURITY-REVIEW.md`:
 ## Fetched at runtime (not vendored)
 
 - [`@playwright/mcp`](https://github.com/microsoft/playwright-mcp) `0.0.83` (Apache-2.0), started by
-  `plugins/game-dev/bin/playwright-mcp.sh` through `npx`; it pulls `playwright` from npm.
+  `plugins/agent-plugin/bin/playwright-mcp.sh` through `npx`; it pulls `playwright` from npm.
 - The SessionStart hook installs `pillow`, `numpy`, `scipy`, `resvg-py` from PyPI and the
   project's own npm dependencies, only in cloud sessions.
 
 ## Remote service
 
-The PixelLab MCP server (`plugins/game-dev/.mcp.json`) is a remote service at
+The PixelLab MCP server (`plugins/agent-plugin/.mcp.json`) is a remote service at
 `https://api.pixellab.ai/mcp`, used under PixelLab's own terms.
