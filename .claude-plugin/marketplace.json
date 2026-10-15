@@ -12,7 +12,7 @@
       "displayName": "Agent Plugin",
       "source": "./plugins/agent-plugin",
       "description": "Setup hook (tools for the skills), PixelLab and Playwright MCP servers, paid-call policy",
-      "version": "0.5.0"
+      "version": "0.5.1"
     },
     {
       "name": "agent-sprite-forge",
@@ -127,15 +127,8 @@
     {
       "name": "vite",
       "displayName": "Vite",
-      "source": {
-        "source": "github",
-        "repo": "antfu/skills"
-      },
-      "strict": false,
-      "skills": [
-        "./skills/vite"
-      ],
-      "description": "Vite skill: config, features, plugin API, build/SSR, environment API, Rolldown migration (upstream antfu/skills, MIT)"
+      "source": "./plugins/vite",
+      "description": "Vite, Vitest and pnpm skills (antfu/skills, MIT), copied into this repo and synced weekly by a GitHub Action"
     }
   ]
 }

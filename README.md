@@ -8,7 +8,7 @@ Marketplace Claude Code `agent-plugin` gồm 5 plugin:
 | **Agent Sprite Forge** (`agent-sprite-forge`) | 5 skill vẽ: `generate2dsprite`, `generate2dmap`, `generate2dmedia`, `video2dsprite`, `codeart2d` | [0x0funky/agent-sprite-forge](https://github.com/0x0funky/agent-sprite-forge), nhánh mặc định |
 | **gamedev** | 75 skill làm game (router, Phaser, Godot, Unity, Unreal, UI/UX, game feel, level design, RPG, …) | [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills), nhánh mặc định |
 | **Playwright** (`playwright`) | 3 skill của Playwright: `playwright-cli`, `playwright-component-testing`, `playwright-trace` | [microsoft/playwright](https://github.com/microsoft/playwright), nhánh mặc định |
-| **Vite** (`vite`) | Skill `vite` (kèm các skill khác trong repo: `vitest`, `pnpm`, `vue`, `nuxt`, `unocss`, …) | [antfu/skills](https://github.com/antfu/skills), nhánh mặc định |
+| **Vite** (`vite`) | Skill `vite`, `vitest`, `pnpm` | chép từ [antfu/skills](https://github.com/antfu/skills) vào `plugins/vite`, GitHub Action đồng bộ mỗi thứ Hai |
 
 - Các plugin skill **tự cập nhật theo repo gốc** (không ghim, không rà trước). Danh sách skill của
   `gamedev` được chép trong `.claude-plugin/marketplace.json`: skill mới ở upstream chỉ hiện sau khi
