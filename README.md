@@ -1,20 +1,19 @@
 # Agent Plugin
 
-Marketplace Claude Code chứa plugin **`agent-plugin`**: 24 skill làm game, MCP **PixelLab** và **Playwright**,
-cùng hook tự cài công cụ trong phiên cloud, để mọi phiên Claude Code (mọi repo) có cùng bộ công cụ.
+Marketplace Claude Code `agent-plugin` gồm 3 plugin:
 
-| Thành phần | Nội dung |
-|---|---|
-| Vẽ (Agent Sprite Forge) | `generate2dsprite`, `generate2dmap`, `generate2dmedia`, `video2dsprite`, `codeart2d` |
-| Làm game | `router`, `phaser-core`, `phaser-arcade-physics`, `game-ui-ux`, `game-feel`, `level-design`, `camera-systems`, `input-systems`, `audio-design`, `save-systems`, `procedural-gen`, `game-ai`, `dialogue-systems`, `rpg`, `visual-novel`, `physics-tuning`, `performance-optimization`, `prototype-fast`, `create-game-assets` |
-| MCP | `pixellab` — `https://api.pixellab.ai/mcp`, token đọc từ biến môi trường `PIXELLAB_API_KEY` |
-| MCP | `playwright` — `@playwright/mcp@0.0.83` qua `npx` (trình duyệt headless: mở trang, chụp màn hình, bấm, đọc console). Dùng Chromium có sẵn ở `/opt/pw-browsers/chromium` nếu có |
-| Hook SessionStart | `hooks/ensure-deps.sh` — xem mục "Tự cài công cụ" |
+| Plugin | Nội dung | Nguồn |
+|---|---|---|
+| **Agent Plugin** (`agent-plugin`) | Hook tự cài công cụ, MCP `pixellab` và `playwright`, nhắc "hỏi trước khi gọi API trả phí" | repo này |
+| **Agent Sprite Forge** (`agent-sprite-forge`) | 5 skill vẽ: `generate2dsprite`, `generate2dmap`, `generate2dmedia`, `video2dsprite`, `codeart2d` | [0x0funky/agent-sprite-forge](https://github.com/0x0funky/agent-sprite-forge), nhánh mặc định |
+| **gamedev** | 75 skill làm game (router, Phaser, Godot, Unity, Unreal, UI/UX, game feel, level design, RPG, …) | [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills), nhánh mặc định |
 
-- Nguồn, giấy phép và các chỗ đã sửa: [THIRD_PARTY.md](THIRD_PARTY.md).
-- Kết quả rà bảo mật: [SECURITY-REVIEW.md](SECURITY-REVIEW.md). Skill `game-assets` (Meowa) bị loại.
-- Skill vẽ chỉ gọi API trả phí sau khi hỏi bạn (đường đi, số lượt, chi phí ước tính).
-- Skill Phaser viết cho Phaser 4; dự án Phaser 3 cần đối chiếu API.
+- Hai plugin skill **tự cập nhật theo repo gốc** (không ghim, không rà trước). Danh sách skill của
+  `gamedev` được chép trong `.claude-plugin/marketplace.json`: skill mới ở upstream chỉ hiện sau khi
+  cập nhật danh sách này.
+- MCP `pixellab`: `https://api.pixellab.ai/mcp`, token từ biến môi trường `PIXELLAB_API_KEY`.
+- MCP `playwright`: `@playwright/mcp@0.0.83` qua `npx`, trình duyệt headless.
+- Nguồn và giấy phép: [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ## Tự cài công cụ (hook SessionStart)
 
@@ -45,28 +44,19 @@ Setup script của môi trường cloud vì vậy có thể để trống (`exit
 
 ## Cài cho mọi phiên
 
-1. claude.ai → **Customize → Plugins → Add → Add marketplace** → nhập `ntruong2/agent-plugin`
-   (repo private: cần đã kết nối GitHub và cấp cho Claude GitHub App quyền vào repo này).
-2. Bật plugin **agent-plugin**. Phiên mới sẽ có các skill.
-3. PixelLab: thêm **biến môi trường** `PIXELLAB_API_KEY` vào môi trường cloud (menu môi trường →
-   Edit). Biến gắn theo môi trường, mỗi môi trường thêm một lần. Dùng biến môi trường thường;
-   token để trong "Network secrets" có thể không tới được MCP.
-4. Mở phiên mới để kiểm tra: skill có trong danh sách, công cụ `pixellab` trả lời.
+1. claude.ai → **Customize → Plugins → Add → Add marketplace** → `https://github.com/ntruong2/agent-plugin`
+   (repo private: cần đã kết nối GitHub và Claude GitHub App có quyền vào repo này).
+2. Bật **Agent Plugin**, **Agent Sprite Forge**, **gamedev**; bật **Sync automatically** nếu có.
+3. Thêm biến môi trường `PIXELLAB_API_KEY` vào môi trường cloud (menu môi trường → Edit).
 
 Trên máy cá nhân (CLI):
 
 ```bash
 claude plugin marketplace add ntruong2/agent-plugin
 claude plugin install agent-plugin@agent-plugin
+claude plugin install agent-sprite-forge@agent-plugin
+claude plugin install gamedev@agent-plugin
 ```
 
-## Cập nhật skill từ upstream
-
-Chép lại thư mục skill từ repo nguồn (đường dẫn trong `skills-lock.json`), áp lại các chỗ sửa
-trong THIRD_PARTY.md, rà lại phần thay đổi, tăng `version` trong
-`plugins/agent-plugin/.claude-plugin/plugin.json` và `.claude-plugin/marketplace.json`, rồi:
-
-```bash
-claude plugin validate .
-claude plugin validate plugins/agent-plugin
-```
+Ghi chú: trên claude.ai bản web (chat/Cowork) hook và MCP `playwright` bị bỏ qua; chúng chạy trong
+Claude Code (phiên cloud và CLI).

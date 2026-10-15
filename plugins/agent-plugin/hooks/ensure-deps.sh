@@ -15,6 +15,8 @@ if [ ! -t 0 ]; then
   [ -n "$s" ] && source_evt="$s"
 fi
 
+echo "agent-plugin policy: a configured API key is not consent to spend. Before the first paid generation call of a session (Agent Sprite Forge route_media.py / generate2dsprite / generate2dmap / video2dsprite, PixelLab, any image or video API), tell the user the route, the number of calls and the estimated cost, and wait for their go-ahead."
+
 lock_pid() { cat "$LOCK/pid" 2>/dev/null; }
 lock_alive() { [ -d "$LOCK" ] && p="$(lock_pid)" && [ -n "$p" ] && kill -0 "$p" 2>/dev/null; }
 

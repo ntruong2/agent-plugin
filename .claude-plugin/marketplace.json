@@ -4,15 +4,110 @@
     "name": "ntruong2"
   },
   "metadata": {
-    "description": "Agent Plugin: game-dev skills, PixelLab and Playwright MCP servers for Claude Code"
+    "description": "Agent Plugin: setup hook, PixelLab and Playwright MCP, plus Agent Sprite Forge and awesome-gamedev-agent-skills straight from their upstream repos"
   },
   "plugins": [
     {
       "name": "agent-plugin",
       "displayName": "Agent Plugin",
       "source": "./plugins/agent-plugin",
-      "description": "24 game-dev skills (Agent Sprite Forge, awesome-gamedev-agent-skills), PixelLab and Playwright MCP servers, and a cloud setup hook",
-      "version": "0.3.2"
+      "description": "Setup hook (tools for the skills), PixelLab and Playwright MCP servers, paid-call policy",
+      "version": "0.4.0"
+    },
+    {
+      "name": "agent-sprite-forge",
+      "displayName": "Agent Sprite Forge",
+      "source": {
+        "source": "github",
+        "repo": "0x0funky/agent-sprite-forge"
+      },
+      "description": "Sprites, maps, code art, video-to-sprite and media API skills (upstream 0x0funky/agent-sprite-forge, MIT)"
+    },
+    {
+      "name": "gamedev",
+      "source": {
+        "source": "github",
+        "repo": "gamedev-skills/awesome-gamedev-agent-skills"
+      },
+      "strict": false,
+      "skills": [
+        "./router",
+        "./skills/godot/godot-gdscript",
+        "./skills/godot/godot-nodes-scenes",
+        "./skills/godot/godot-signals-groups",
+        "./skills/godot/godot-2d-movement",
+        "./skills/godot/godot-tilemap",
+        "./skills/godot/godot-physics",
+        "./skills/godot/godot-ui-control",
+        "./skills/godot/godot-animation",
+        "./skills/godot/godot-shaders",
+        "./skills/godot/godot-3d-essentials",
+        "./skills/godot/godot-resources",
+        "./skills/godot/godot-audio",
+        "./skills/godot/godot-multiplayer",
+        "./skills/godot/godot-export",
+        "./skills/godot/godot-csharp",
+        "./skills/godot/godot-gdscript-headless-testing",
+        "./skills/unity/unity-csharp-scripting",
+        "./skills/unity/unity-input-system",
+        "./skills/unity/unity-physics",
+        "./skills/unity/unity-animation",
+        "./skills/unity/unity-scriptableobjects",
+        "./skills/unity/unity-tilemap-2d",
+        "./skills/unity/unity-navmesh",
+        "./skills/unity/unity-build-pipeline",
+        "./skills/unreal/unreal-blueprints",
+        "./skills/unreal/unreal-cpp-gameplay",
+        "./skills/unreal/unreal-enhanced-input",
+        "./skills/unreal/unreal-behavior-trees",
+        "./skills/unreal/unreal-niagara",
+        "./skills/unreal/unreal-packaging",
+        "./skills/web-engines/phaser-core",
+        "./skills/web-engines/phaser-arcade-physics",
+        "./skills/web-engines/pixijs-rendering",
+        "./skills/web-engines/threejs-scene-setup",
+        "./skills/web-engines/threejs-gltf-loading",
+        "./skills/web-engines/threejs-materials-lighting",
+        "./skills/other-engines/bevy-ecs",
+        "./skills/other-engines/pygame-core",
+        "./skills/other-engines/love2d-core",
+        "./skills/other-engines/roblox-luau",
+        "./skills/other-engines/roblox-datastores",
+        "./skills/other-engines/roblox-ui",
+        "./skills/other-engines/roblox-networking",
+        "./skills/other-engines/roblox-characters",
+        "./skills/other-engines/roblox-physics",
+        "./skills/other-engines/roblox-studio-workflow",
+        "./skills/disciplines/create-game-assets",
+        "./skills/disciplines/game-ai",
+        "./skills/disciplines/procedural-gen",
+        "./skills/disciplines/dialogue-systems",
+        "./skills/disciplines/save-systems",
+        "./skills/disciplines/audio-design",
+        "./skills/disciplines/shader-programming",
+        "./skills/disciplines/physics-tuning",
+        "./skills/disciplines/level-design",
+        "./skills/disciplines/input-systems",
+        "./skills/disciplines/game-feel",
+        "./skills/disciplines/game-ui-ux",
+        "./skills/disciplines/camera-systems",
+        "./skills/disciplines/performance-optimization",
+        "./skills/disciplines/ai-behavior-trees-utility-ai",
+        "./skills/genres/platformer",
+        "./skills/genres/roguelike",
+        "./skills/genres/rpg",
+        "./skills/genres/fps-shooter",
+        "./skills/genres/tower-defense",
+        "./skills/genres/card-game",
+        "./skills/genres/visual-novel",
+        "./skills/genres/survival-crafting",
+        "./skills/genres/puzzle",
+        "./skills/workflows/game-jam",
+        "./skills/workflows/prototype-fast",
+        "./skills/workflows/steam-publish",
+        "./skills/workflows/itch-publish"
+      ],
+      "description": "The router plus all game-dev skills across engines, disciplines, genres and workflows (upstream gamedev-skills/awesome-gamedev-agent-skills, Apache-2.0)"
     }
   ]
 }
