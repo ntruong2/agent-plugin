@@ -20,4 +20,13 @@ Fetched at runtime by the `agent-plugin` plugin:
 The PixelLab MCP server (`plugins/agent-plugin/.mcp.json`) is a remote service at
 `https://api.pixellab.ai/mcp`, used under PixelLab's own terms.
 
+Copied into this repository and synced weekly by `.github/workflows/sync-graphify-skill.yml`
+(upstream commit in `plugins/graphify/UPSTREAM_COMMIT`):
+
+| Plugin | Upstream | License |
+|---|---|---|
+| `graphify` (`graphify/skill.md` and `graphify/skills/claude/references/`) | [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | Apache-2.0, with earlier portions under MIT (`plugins/graphify/LICENSE`, `LICENSE-MIT`, `NOTICE`) |
+
+The `graphify` skill installs the PyPI package `graphifyy` itself on first run (`uv tool install` or `pip`).
+
 `SECURITY-REVIEW.md` records the review of the copies shipped in versions 0.1.0–0.3.2.

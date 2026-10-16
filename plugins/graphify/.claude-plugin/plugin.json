@@ -1,0 +1,8 @@
+{
+  "name": "graphify",
+  "displayName": "Graphify",
+  "description": "Graphify skill: turn code, docs, PDFs, images and video into a queryable knowledge graph (Graphify-Labs/graphify, Apache-2.0), synced weekly from upstream",
+  "author": { "name": "Graphify Labs", "url": "https://github.com/Graphify-Labs" },
+  "homepage": "https://github.com/Graphify-Labs/graphify",
+  "license": "Apache-2.0"
+}
