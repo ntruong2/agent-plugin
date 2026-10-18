@@ -4,7 +4,7 @@
     "name": "ntruong2"
   },
   "metadata": {
-    "description": "Agent Plugin: setup hook, PixelLab and Playwright MCP, plus Agent Sprite Forge, awesome-gamedev-agent-skills and Graphify straight from their upstream repos"
+    "description": "Agent Plugin: setup hook, PixelLab and Playwright MCP, plus Agent Sprite Forge and awesome-gamedev-agent-skills straight from their upstream repos"
   },
   "plugins": [
     {
@@ -129,12 +129,6 @@
       "displayName": "Vite",
       "source": "./plugins/vite",
       "description": "Vite, Vitest and pnpm skills (antfu/skills, MIT), copied into this repo and synced weekly by a GitHub Action"
-    },
-    {
-      "name": "graphify",
-      "displayName": "Graphify",
-      "source": "./plugins/graphify",
-      "description": "Graphify knowledge-graph skill (Graphify-Labs/graphify, Apache-2.0), copied into this repo and synced weekly by a GitHub Action"
     }
   ]
 }
