@@ -9,7 +9,7 @@ Marketplace Claude Code `agent-plugin` gồm 6 plugin:
 | **gamedev** | 75 skill làm game (router, Phaser, Godot, Unity, Unreal, UI/UX, game feel, level design, RPG, …) | [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills), nhánh mặc định |
 | **Playwright** (`playwright`) | 3 skill của Playwright: `playwright-cli`, `playwright-component-testing`, `playwright-trace` | [microsoft/playwright](https://github.com/microsoft/playwright), nhánh mặc định |
 | **Vite** (`vite`) | Skill `vite`, `vitest`, `pnpm` | chép từ [antfu/skills](https://github.com/antfu/skills) vào `plugins/vite`, GitHub Action đồng bộ mỗi thứ Hai |
-| **pxl** (`pxl`) | Skill `pxl-pixel-art`: vẽ pixel art bằng code (DSL JavaScript `.px.js`) ra PNG, GIF, sprite sheet, tileset, scene; có trình xem trực tiếp | [augusto-scarvalho/claude-pxl](https://github.com/augusto-scarvalho/claude-pxl), nhánh mặc định |
+| **pxl** (`pxl`) | Skill `pxl-pixel-art`: vẽ pixel art bằng code (DSL JavaScript `.px.js`) ra PNG, GIF, sprite sheet, tileset, scene; có trình xem trực tiếp | chép từ [augusto-scarvalho/claude-pxl](https://github.com/augusto-scarvalho/claude-pxl) vào `plugins/pxl` (bỏ `docs/`, test), GitHub Action đồng bộ mỗi thứ Hai |
 
 - Các plugin skill **tự cập nhật theo repo gốc** (không ghim, không rà trước). Danh sách skill của
   `gamedev` được chép trong `.claude-plugin/marketplace.json`: skill mới ở upstream chỉ hiện sau khi
