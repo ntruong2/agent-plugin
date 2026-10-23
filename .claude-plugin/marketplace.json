@@ -133,15 +133,8 @@
     {
       "name": "pxl",
       "displayName": "pxl",
-      "source": {
-        "source": "github",
-        "repo": "augusto-scarvalho/claude-pxl"
-      },
-      "strict": false,
-      "skills": [
-        "./"
-      ],
-      "description": "pxl pixel-art skill: a JavaScript DSL that renders sprites, animations, tilesets, scenes and sheets, with a live viewer (upstream augusto-scarvalho/claude-pxl, MIT)"
+      "source": "./plugins/pxl",
+      "description": "pxl pixel-art skill (augusto-scarvalho/claude-pxl, MIT), copied into this repo and synced weekly by a GitHub Action"
     }
   ]
 }
