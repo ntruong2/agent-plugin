@@ -129,6 +129,19 @@
       "displayName": "Vite",
       "source": "./plugins/vite",
       "description": "Vite, Vitest and pnpm skills (antfu/skills, MIT), copied into this repo and synced weekly by a GitHub Action"
+    },
+    {
+      "name": "meowa",
+      "displayName": "Meowa",
+      "source": {
+        "source": "github",
+        "repo": "Meowa-AI/meowa-skills"
+      },
+      "strict": false,
+      "skills": [
+        "./skills/game-assets"
+      ],
+      "description": "Meowa game-assets skill: game design docs, pixel/HD sprites, UI, tilesets, maps, animation, video, sound, music and TTS through the paid Meowa API (upstream Meowa-AI/meowa-skills, MIT)"
     }
   ]
 }
