@@ -129,12 +129,6 @@
       "displayName": "Vite",
       "source": "./plugins/vite",
       "description": "Vite, Vitest and pnpm skills (antfu/skills, MIT), copied into this repo and synced weekly by a GitHub Action"
-    },
-    {
-      "name": "pxl",
-      "displayName": "pxl",
-      "source": "./plugins/pxl",
-      "description": "pxl pixel-art skill (augusto-scarvalho/claude-pxl, MIT), copied into this repo and synced weekly by a GitHub Action"
     }
   ]
 }
