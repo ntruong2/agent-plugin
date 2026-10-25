@@ -15,21 +15,7 @@ if [ ! -t 0 ]; then
   [ -n "$s" ] && source_evt="$s"
 fi
 
-# AGENT_PLUGIN_PAID_OK=1 (set by the owner in the environment) pre-approves paid Agent Sprite Forge
-# generation, capped per session: the caps go to Bash through CLAUDE_ENV_FILE. A cap set explicitly
-# in the environment wins over AGENT_PLUGIN_PAID_MAX (default 20).
-if [ "${AGENT_PLUGIN_PAID_OK:-}" = "1" ]; then
-  cap="${AGENT_PLUGIN_PAID_MAX:-20}"
-  case "$cap" in ''|*[!0-9]*) cap=20 ;; esac
-  paid_cap="${FORGE_MAX_PAID_REQUESTS:-$cap}"
-  cli_cap="${FORGE_SESSION_IMAGES:-$cap}"
-  if [ -n "${CLAUDE_ENV_FILE:-}" ]; then
-    printf 'export FORGE_MAX_PAID_REQUESTS=%s\nexport FORGE_SESSION_IMAGES=%s\n' "$paid_cap" "$cli_cap" >> "$CLAUDE_ENV_FILE" 2>/dev/null
-  fi
-  echo "agent-plugin policy: the owner pre-approved paid Agent Sprite Forge generation (AGENT_PLUGIN_PAID_OK=1). Run route_media.py / generate2dsprite / generate2dmap / video2dsprite without asking first, up to $paid_cap paid generations per session. FORGE_MAX_PAID_REQUESTS=$paid_cap and FORGE_SESSION_IMAGES=$cli_cap are exported for Bash; if a command's environment lacks them, set them on that command. When a cap stops a call, stop and ask the user before raising it. After each batch, say the route, the number of calls and the cost. PixelLab and any other paid image or video API still need the user's go-ahead before their first call of a session."
-else
-  echo "agent-plugin policy: a configured API key is not consent to spend. Before the first paid generation call of a session (Agent Sprite Forge route_media.py / generate2dsprite / generate2dmap / video2dsprite, PixelLab, any image or video API), tell the user the route, the number of calls and the estimated cost, and wait for their go-ahead."
-fi
+echo "agent-plugin policy: a configured API key is not consent to spend. Before the first paid generation call of a session (Agent Sprite Forge route_media.py / generate2dsprite / generate2dmap / video2dsprite, PixelLab, any image or video API), tell the user the route, the number of calls and the estimated cost, and wait for their go-ahead."
 
 lock_pid() { cat "$LOCK/pid" 2>/dev/null; }
 lock_alive() { [ -d "$LOCK" ] && p="$(lock_pid)" && [ -n "$p" ] && kill -0 "$p" 2>/dev/null; }
