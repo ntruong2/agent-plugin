@@ -12,7 +12,7 @@
       "displayName": "Agent Plugin",
       "source": "./plugins/agent-plugin",
       "description": "Setup hook (tools for the skills), PixelLab and Playwright MCP servers, paid-call policy",
-      "version": "0.5.1"
+      "version": "0.6.0"
     },
     {
       "name": "agent-sprite-forge",
