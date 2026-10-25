@@ -1,6 +1,6 @@
 # Agent Plugin
 
-Marketplace Claude Code `agent-plugin` gồm 5 plugin:
+Marketplace Claude Code `agent-plugin` gồm 6 plugin:
 
 | Plugin | Nội dung | Nguồn |
 |---|---|---|
@@ -9,10 +9,12 @@ Marketplace Claude Code `agent-plugin` gồm 5 plugin:
 | **gamedev** | 75 skill làm game (router, Phaser, Godot, Unity, Unreal, UI/UX, game feel, level design, RPG, …) | [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills), nhánh mặc định |
 | **Playwright** (`playwright`) | 3 skill của Playwright: `playwright-cli`, `playwright-component-testing`, `playwright-trace` | [microsoft/playwright](https://github.com/microsoft/playwright), nhánh mặc định |
 | **Vite** (`vite`) | Skill `vite`, `vitest`, `pnpm` | chép từ [antfu/skills](https://github.com/antfu/skills) vào `plugins/vite`, GitHub Action đồng bộ mỗi thứ Hai |
+| **Meowa** (`meowa`) | Skill `game-assets`: tài liệu thiết kế game, sprite pixel/HD, UI, tileset, map, animation, video, âm thanh, nhạc, lồng tiếng qua API Meowa (trả phí theo credit) | [Meowa-AI/meowa-skills](https://github.com/Meowa-AI/meowa-skills), nhánh mặc định |
 
 - Các plugin skill **tự cập nhật theo repo gốc** (không ghim, không rà trước). Danh sách skill của
   `gamedev` được chép trong `.claude-plugin/marketplace.json`: skill mới ở upstream chỉ hiện sau khi
   cập nhật danh sách này.
+- Skill `game-assets` (Meowa) gọi `https://api.meowa.ai`, key từ biến môi trường `MEOWART_API_KEY`; cần Python `requests` và `Pillow`.
 - MCP `pixellab`: `https://api.pixellab.ai/mcp`, token từ biến môi trường `PIXELLAB_API_KEY`.
 - MCP `playwright`: `@playwright/mcp@0.0.83` qua `npx`, trình duyệt headless.
 - Nguồn và giấy phép: [THIRD_PARTY.md](THIRD_PARTY.md).
@@ -48,8 +50,8 @@ Setup script của môi trường cloud vì vậy có thể để trống (`exit
 
 1. claude.ai → **Customize → Plugins → Add → Add marketplace** → `https://github.com/ntruong2/agent-plugin`
    (repo private: cần đã kết nối GitHub và Claude GitHub App có quyền vào repo này).
-2. Bật **Agent Plugin**, **Agent Sprite Forge**, **gamedev**, **Playwright**, **Vite**; bật **Sync automatically** nếu có.
-3. Thêm biến môi trường `PIXELLAB_API_KEY` vào môi trường cloud (menu môi trường → Edit).
+2. Bật **Agent Plugin**, **Agent Sprite Forge**, **gamedev**, **Playwright**, **Vite**, **Meowa**; bật **Sync automatically** nếu có.
+3. Thêm biến môi trường `PIXELLAB_API_KEY` (và `MEOWART_API_KEY` nếu dùng Meowa) vào môi trường cloud (menu môi trường → Edit).
 
 Trên máy cá nhân (CLI):
 
@@ -60,6 +62,7 @@ claude plugin install agent-sprite-forge@agent-plugin
 claude plugin install gamedev@agent-plugin
 claude plugin install playwright@agent-plugin
 claude plugin install vite@agent-plugin
+claude plugin install meowa@agent-plugin
 ```
 
 Ghi chú: trên claude.ai bản web (chat/Cowork) hook và MCP `playwright` bị bỏ qua; chúng chạy trong
