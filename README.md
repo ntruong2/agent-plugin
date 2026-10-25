@@ -44,25 +44,6 @@ MCP `playwright` lưu ảnh chụp và snapshot ở `~/.cache/agent-plugin/playw
 
 Setup script của môi trường cloud vì vậy có thể để trống (`exit 0`).
 
-## Cho phép gọi API trả phí không cần hỏi
-
-Mặc định, trước lần gọi API tạo ảnh/video trả phí đầu tiên của mỗi phiên, Claude báo tuyến, số lần
-gọi và chi phí ước tính rồi chờ bạn đồng ý. Để bỏ bước hỏi này cho Agent Sprite Forge, thêm vào biến
-môi trường của môi trường cloud (menu môi trường → Edit):
-
-- `AGENT_PLUGIN_PAID_OK=1`: cho phép Agent Sprite Forge gọi API trả phí mà không hỏi trước;
-- `AGENT_PLUGIN_PAID_MAX=20` (tuỳ chọn, mặc định 20): số lần tạo trả phí tối đa mỗi phiên.
-
-Hook đặt `FORGE_MAX_PAID_REQUESTS` (lần gọi API trả phí) và `FORGE_SESSION_IMAGES` (lần gọi Codex/Grok
-CLI) bằng giới hạn đó cho các lệnh Bash; Agent Sprite Forge từ chối lần gọi vượt giới hạn, và Claude
-hỏi trước khi nâng. Nếu bạn tự đặt hai biến `FORGE_*` này thì giá trị của bạn được giữ.
-
-- `FORGE_MAX_PAID_REQUESTS` đếm theo sổ chi tiêu `<project>/.forge/ledger.jsonl`: trong phiên cloud sổ
-  bắt đầu trống ở mỗi container nên giới hạn là theo phiên; trên máy cá nhân (hoặc nếu `.forge/` được
-  commit) nó cộng dồn qua các phiên.
-- Video trả phí cũng tính vào giới hạn này.
-- PixelLab và các API trả phí khác vẫn hỏi trước như cũ.
-
 ## Cài cho mọi phiên
 
 1. claude.ai → **Customize → Plugins → Add → Add marketplace** → `https://github.com/ntruong2/agent-plugin`
