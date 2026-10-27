@@ -1,7 +1,7 @@
 {
   "name": "vite",
   "displayName": "Vite",
-  "description": "Vite, Vitest and pnpm skills by Anthony Fu (antfu/skills, MIT), synced weekly from upstream",
+  "description": "Vite, Vitest and pnpm skills by Anthony Fu (antfu/skills, MIT), synced daily from upstream",
   "author": { "name": "Anthony Fu", "url": "https://github.com/antfu" },
   "homepage": "https://github.com/antfu/skills",
   "license": "MIT"

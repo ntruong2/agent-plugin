@@ -1,8 +1,9 @@
 # Third-party content
 
 The marketplace lists four plugins that are **not copied** into this repository: they are loaded
-straight from their upstream repositories (default branch, no pinning), so upstream changes reach
-every session without review here.
+straight from their upstream repositories. `.github/workflows/sync-upstreams.yml` pins each one daily
+(`sha` in marketplace.json) to the newest default-branch commit that touched its skills, so upstream
+changes reach every session within a day, without review here.
 
 | Plugin | Upstream | License |
 |---|---|---|
