@@ -19,7 +19,8 @@
       "displayName": "Agent Sprite Forge",
       "source": {
         "source": "github",
-        "repo": "0x0funky/agent-sprite-forge"
+        "repo": "0x0funky/agent-sprite-forge",
+        "sha": "5324342fdfab72430f4e9604f3fe427009f8596d"
       },
       "description": "Sprites, maps, code art, video-to-sprite and media API skills (upstream 0x0funky/agent-sprite-forge, MIT)"
     },
@@ -27,7 +28,8 @@
       "name": "gamedev",
       "source": {
         "source": "github",
-        "repo": "gamedev-skills/awesome-gamedev-agent-skills"
+        "repo": "gamedev-skills/awesome-gamedev-agent-skills",
+        "sha": "184b72be02884f782a0058f2eeae2ce4277453e4"
       },
       "strict": false,
       "skills": [
@@ -114,7 +116,8 @@
       "displayName": "Playwright",
       "source": {
         "source": "github",
-        "repo": "microsoft/playwright"
+        "repo": "microsoft/playwright",
+        "sha": "cdcef0bc92d35ae5a50fafd433fb5dcb633742dd"
       },
       "strict": false,
       "skills": [
@@ -136,7 +139,8 @@
       "displayName": "Meowa",
       "source": {
         "source": "github",
-        "repo": "Meowa-AI/meowa-skills"
+        "repo": "Meowa-AI/meowa-skills",
+        "sha": "288e9127e13a5f2293db529dbee5f79aedaeb371"
       },
       "strict": false,
       "skills": [
