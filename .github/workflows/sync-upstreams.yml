@@ -1,0 +1,47 @@
+name: Sync upstream plugins
+
+# Daily: copy the Vite skills from antfu/skills, pin each GitHub-sourced plugin to the newest
+# upstream commit that touched its skills, and commit when anything changed. claude.ai re-reads
+# the marketplace when marketplace.json changes, so the pins carry upstream updates to it.
+on:
+  schedule:
+    - cron: "17 3 * * *"   # every day 03:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Copy Vite skills from antfu/skills
+        run: |
+          git clone --depth 1 https://github.com/antfu/skills.git /tmp/upstream
+          for s in vite vitest pnpm; do
+            rm -rf "plugins/vite/skills/$s"
+            cp -r "/tmp/upstream/skills/$s" plugins/vite/skills/
+          done
+          cp /tmp/upstream/LICENSE.md plugins/vite/LICENSE.md
+          git -C /tmp/upstream rev-parse HEAD > plugins/vite/UPSTREAM_COMMIT
+      - name: Pin upstream commits in marketplace.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          flag=""
+          if [ -n "$(git status --porcelain plugins/vite/skills plugins/vite/LICENSE.md)" ]; then
+            flag="--vite-changed"
+          else
+            git checkout -- plugins/vite/UPSTREAM_COMMIT   # upstream moved, but not in the copied skills
+          fi
+          python3 .github/scripts/sync_upstreams.py $flag | tee /tmp/changes.txt
+      - name: Commit if changed
+        run: |
+          if [ -n "$(git status --porcelain plugins/vite .claude-plugin/marketplace.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add plugins/vite .claude-plugin/marketplace.json
+            git commit -m "chore: sync upstream plugins" -m "$(cat /tmp/changes.txt)"
+            git push
+          fi

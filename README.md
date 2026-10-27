@@ -8,12 +8,15 @@ Marketplace Claude Code `agent-plugin` gồm 6 plugin:
 | **Agent Sprite Forge** (`agent-sprite-forge`) | 5 skill vẽ: `generate2dsprite`, `generate2dmap`, `generate2dmedia`, `video2dsprite`, `codeart2d` | [0x0funky/agent-sprite-forge](https://github.com/0x0funky/agent-sprite-forge), nhánh mặc định |
 | **gamedev** | 75 skill làm game (router, Phaser, Godot, Unity, Unreal, UI/UX, game feel, level design, RPG, …) | [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills), nhánh mặc định |
 | **Playwright** (`playwright`) | 3 skill của Playwright: `playwright-cli`, `playwright-component-testing`, `playwright-trace` | [microsoft/playwright](https://github.com/microsoft/playwright), nhánh mặc định |
-| **Vite** (`vite`) | Skill `vite`, `vitest`, `pnpm` | chép từ [antfu/skills](https://github.com/antfu/skills) vào `plugins/vite`, GitHub Action đồng bộ mỗi thứ Hai |
+| **Vite** (`vite`) | Skill `vite`, `vitest`, `pnpm` | chép từ [antfu/skills](https://github.com/antfu/skills) vào `plugins/vite`, GitHub Action đồng bộ hằng ngày |
 | **Meowa** (`meowa`) | Skill `game-assets`: tài liệu thiết kế game, sprite pixel/HD, UI, tileset, map, animation, video, âm thanh, nhạc, lồng tiếng qua API Meowa (trả phí theo credit) | [Meowa-AI/meowa-skills](https://github.com/Meowa-AI/meowa-skills), nhánh mặc định |
 
-- Các plugin skill **tự cập nhật theo repo gốc** (không ghim, không rà trước). Danh sách skill của
-  `gamedev` được chép trong `.claude-plugin/marketplace.json`: skill mới ở upstream chỉ hiện sau khi
-  cập nhật danh sách này.
+- Các plugin skill **tự cập nhật theo repo gốc** (không rà trước): GitHub Action
+  `sync-upstreams.yml` chạy hằng ngày, ghim mỗi plugin nạp từ GitHub vào commit mới nhất có đổi phần
+  skill (`sha` trong `.claude-plugin/marketplace.json`) và đổi `version` của Vite khi bản chép thay
+  đổi. claude.ai đồng bộ lại marketplace khi `marketplace.json` đổi, nên bản mới tới trong vòng một
+  ngày. Danh sách skill của `gamedev` được chép trong `marketplace.json`: skill mới ở upstream chỉ
+  hiện sau khi cập nhật danh sách này.
 - Skill `game-assets` (Meowa) gọi `https://api.meowa.ai`, key từ biến môi trường `MEOWART_API_KEY`; cần Python `requests` và `Pillow`.
 - MCP `pixellab`: `https://api.pixellab.ai/mcp`, token từ biến môi trường `PIXELLAB_API_KEY`.
 - MCP `playwright`: `@playwright/mcp@0.0.83` qua `npx`, trình duyệt headless.
