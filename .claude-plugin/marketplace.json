@@ -20,7 +20,7 @@
       "source": {
         "source": "github",
         "repo": "0x0funky/agent-sprite-forge",
-        "sha": "5324342fdfab72430f4e9604f3fe427009f8596d"
+        "sha": "72fa5ad92d79b811acff464da32c8f3b1caa010f"
       },
       "description": "Sprites, maps, code art, video-to-sprite and media API skills (upstream 0x0funky/agent-sprite-forge, MIT)"
     },
@@ -140,7 +140,7 @@
       "source": {
         "source": "github",
         "repo": "Meowa-AI/meowa-skills",
-        "sha": "7835ee57042091a8be1a7530ee727be933a32c00"
+        "sha": "c9be89cc1a25c9fb51dd17e2867b334cbbc4e50a"
       },
       "strict": false,
       "skills": [
