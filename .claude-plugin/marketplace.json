@@ -20,7 +20,7 @@
       "source": {
         "source": "github",
         "repo": "0x0funky/agent-sprite-forge",
-        "sha": "72fa5ad92d79b811acff464da32c8f3b1caa010f"
+        "sha": "6b3da5c444363378e20f3fce130ebecc22f343dd"
       },
       "description": "Sprites, maps, code art, video-to-sprite and media API skills (upstream 0x0funky/agent-sprite-forge, MIT)"
     },
