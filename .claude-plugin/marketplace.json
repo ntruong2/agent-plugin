@@ -29,7 +29,7 @@
       "source": {
         "source": "github",
         "repo": "gamedev-skills/awesome-gamedev-agent-skills",
-        "sha": "4cce500ce1a779b12fdd824be581c7d2ab4e7ba2"
+        "sha": "e296999afb2a96addd5adcf7536a3fd553c08b77"
       },
       "strict": false,
       "skills": [
@@ -117,7 +117,7 @@
       "source": {
         "source": "github",
         "repo": "microsoft/playwright",
-        "sha": "8d309121bc110cc8bf6aeceae45066a6db051286"
+        "sha": "fa266946139aa44c514e5a3f46cfca39d1e9c9d4"
       },
       "strict": false,
       "skills": [
