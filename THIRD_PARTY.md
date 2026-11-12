@@ -16,8 +16,9 @@ Fetched at runtime by the `agent-plugin` plugin:
 
 - [`@playwright/mcp`](https://github.com/microsoft/playwright-mcp) `0.0.83` (Apache-2.0), started by
   `plugins/agent-plugin/scripts/playwright-mcp.sh` through `npx`.
-- [`@coding-solo/godot-mcp`](https://github.com/Coding-Solo/godot-mcp) `0.1.1` (MIT), started by
-  `plugins/agent-plugin/scripts/godot-mcp.sh` through `npx`; it drives a Godot executable installed separately.
+- [`tugcantopaloglu/godot-mcp`](https://github.com/tugcantopaloglu/godot-mcp) `3.1.0` (MIT), commit `88f0fbc`
+  (its npm package is stuck at 1.0.0), fetched, built with `npm ci` and started by
+  `plugins/agent-plugin/scripts/godot-mcp.sh`; it drives a Godot executable installed separately.
 - PyPI packages `pillow`, `numpy`, `scipy`, `resvg-py` and each repo's own npm dependencies,
   installed by the SessionStart hook in cloud sessions only.
 

@@ -20,7 +20,7 @@ Marketplace Claude Code `agent-plugin` gồm 6 plugin:
 - Skill `game-assets` (Meowa) gọi `https://api.meowa.ai`, key từ biến môi trường `MEOWART_API_KEY`; cần Python `requests` và `Pillow`.
 - MCP `pixellab`: `https://api.pixellab.ai/mcp`, token từ biến môi trường `PIXELLAB_API_KEY`.
 - MCP `playwright`: `@playwright/mcp@0.0.83` qua `npx`, trình duyệt headless.
-- MCP `godot`: `@coding-solo/godot-mcp@0.1.1` qua `npx` (chạy editor, chạy project, đọc log gỡ lỗi, tạo scene, thêm node). Cần file chạy Godot trên máy: đặt `GODOT_PATH=/đường/dẫn/godot`, hoặc để `godot` trong PATH; hook chưa tự cài Godot.
+- MCP `godot`: [tugcantopaloglu/godot-mcp](https://github.com/tugcantopaloglu/godot-mcp) 3.1.0 (157 công cụ: editor, chạy project, scene/node, script, tài nguyên, runtime), ghim commit `88f0fbc`. Gói npm của họ chỉ có bản 1.0.0 nên lần khởi động đầu tải và build từ GitHub vào `~/.cache/agent-plugin/godot-mcp` (khoảng một phút; chạy `/mcp` để kết nối lại nếu quá hạn). Cần Node ≥ 18, git và file chạy Godot 4.4+ (`GODOT_PATH=/đường/dẫn/godot` hoặc `godot` trong PATH); hook chưa tự cài Godot.
 - Nguồn và giấy phép: [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ## Tự cài công cụ (hook SessionStart)
