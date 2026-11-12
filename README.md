@@ -20,6 +20,7 @@ Marketplace Claude Code `agent-plugin` gồm 6 plugin:
 - Skill `game-assets` (Meowa) gọi `https://api.meowa.ai`, key từ biến môi trường `MEOWART_API_KEY`; cần Python `requests` và `Pillow`.
 - MCP `pixellab`: `https://api.pixellab.ai/mcp`, token từ biến môi trường `PIXELLAB_API_KEY`.
 - MCP `playwright`: `@playwright/mcp@0.0.83` qua `npx`, trình duyệt headless.
+- MCP `godot`: `@coding-solo/godot-mcp@0.1.1` qua `npx` (chạy editor, chạy project, đọc log gỡ lỗi, tạo scene, thêm node). Cần file chạy Godot trên máy: đặt `GODOT_PATH=/đường/dẫn/godot`, hoặc để `godot` trong PATH; hook chưa tự cài Godot.
 - Nguồn và giấy phép: [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ## Tự cài công cụ (hook SessionStart)

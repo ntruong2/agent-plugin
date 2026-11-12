@@ -10,7 +10,16 @@
     "playwright": {
       "type": "stdio",
       "command": "bash",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/playwright-mcp.sh"]
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/scripts/playwright-mcp.sh"
+      ]
+    },
+    "godot": {
+      "type": "stdio",
+      "command": "bash",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/scripts/godot-mcp.sh"
+      ]
     }
   }
 }
