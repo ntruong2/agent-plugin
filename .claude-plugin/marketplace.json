@@ -20,7 +20,7 @@
       "source": {
         "source": "github",
         "repo": "0x0funky/agent-sprite-forge",
-        "sha": "6b3da5c444363378e20f3fce130ebecc22f343dd"
+        "sha": "25203d03900b46b444bdd72a75768c33d1895ad6"
       },
       "description": "Sprites, maps, code art, video-to-sprite and media API skills (upstream 0x0funky/agent-sprite-forge, MIT)"
     },
@@ -117,7 +117,7 @@
       "source": {
         "source": "github",
         "repo": "microsoft/playwright",
-        "sha": "fa266946139aa44c514e5a3f46cfca39d1e9c9d4"
+        "sha": "fb10ea7d556bbf149b6ee0d44d0abaf9b1c6d845"
       },
       "strict": false,
       "skills": [
