@@ -4,15 +4,29 @@
     "name": "ntruong2"
   },
   "metadata": {
-    "description": "Agent Plugin: setup hook, PixelLab and Playwright MCP, plus Agent Sprite Forge and awesome-gamedev-agent-skills straight from their upstream repos"
+    "description": "Agent Plugin setup hook, PixelLab and Playwright MCP plugins, plus Agent Sprite Forge, awesome-gamedev-agent-skills, Playwright, Vite and Meowa skills"
   },
   "plugins": [
     {
       "name": "agent-plugin",
       "displayName": "Agent Plugin",
       "source": "./plugins/agent-plugin",
-      "description": "Setup hook (tools for the skills), PixelLab and Playwright MCP servers, paid-call policy",
-      "version": "0.6.3"
+      "description": "Setup hook (tools for the skills in cloud sessions) and the paid-call policy",
+      "version": "0.7.0"
+    },
+    {
+      "name": "pixellab",
+      "displayName": "PixelLab",
+      "source": "./plugins/pixellab",
+      "description": "PixelLab MCP server: AI pixel-art characters, animations, tilesets, maps and sound (needs PIXELLAB_API_KEY)",
+      "version": "0.1.0"
+    },
+    {
+      "name": "playwright-mcp",
+      "displayName": "Playwright MCP",
+      "source": "./plugins/playwright-mcp",
+      "description": "Playwright MCP server (headless Chromium) for browsing and testing pages",
+      "version": "0.1.0"
     },
     {
       "name": "agent-sprite-forge",

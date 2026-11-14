@@ -1,0 +1,9 @@
+{
+  "name": "playwright-mcp",
+  "displayName": "Playwright MCP",
+  "version": "0.1.0",
+  "description": "Playwright MCP server (@playwright/mcp, headless Chromium) for browsing and testing pages",
+  "author": {
+    "name": "ntruong2"
+  }
+}

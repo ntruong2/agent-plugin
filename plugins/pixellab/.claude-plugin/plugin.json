@@ -1,0 +1,9 @@
+{
+  "name": "pixellab",
+  "displayName": "PixelLab",
+  "version": "0.1.0",
+  "description": "PixelLab MCP server: AI pixel-art characters, animations, tilesets, maps and sound (remote service api.pixellab.ai, needs PIXELLAB_API_KEY)",
+  "author": {
+    "name": "ntruong2"
+  }
+}
