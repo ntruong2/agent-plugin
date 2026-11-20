@@ -131,7 +131,7 @@
       "source": {
         "source": "github",
         "repo": "microsoft/playwright",
-        "sha": "fb10ea7d556bbf149b6ee0d44d0abaf9b1c6d845"
+        "sha": "a018f24a4fc76e2120d3b35d2415f1e5bd4b073e"
       },
       "strict": false,
       "skills": [
@@ -154,7 +154,7 @@
       "source": {
         "source": "github",
         "repo": "Meowa-AI/meowa-skills",
-        "sha": "bf6ec02556e8edcc4a140951a8a02e69bc170c77"
+        "sha": "0394e94a6c754e6d7c8fd13ea2392631b5259f98"
       },
       "strict": false,
       "skills": [
