@@ -131,7 +131,7 @@
       "source": {
         "source": "github",
         "repo": "microsoft/playwright",
-        "sha": "a018f24a4fc76e2120d3b35d2415f1e5bd4b073e"
+        "sha": "99d4c415db3794d1c989be16ac4987f4529e3220"
       },
       "strict": false,
       "skills": [
